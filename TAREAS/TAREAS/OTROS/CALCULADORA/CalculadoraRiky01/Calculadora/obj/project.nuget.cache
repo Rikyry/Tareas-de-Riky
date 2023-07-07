@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "bsY6gu36SVU30cY+E44NFIlspsPDerP25fBQt1hXikWwYLNVL6HQe1MkeeNJYEmD28NJXH9tQXiuhykvFtTISw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rikir\\source\\repos\\CalculadoraRiky01\\Calculadora\\Calculadora.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rikir\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\rikir\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\rikir\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\rikir\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+  ],
+  "logs": []
+}
