@@ -77,6 +77,14 @@ void mostrarClientes(RegistroClientes registro) {
     printf("==============================================\n");
 }
 
+void limpiarPantalla() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
 int main() {
     RegistroClientes registro;
     registro.cantidad = 0;
@@ -98,6 +106,8 @@ int main() {
         printf("==============================================\n");
         printf("Ingrese una opcion: ");
         scanf("%d", &opcion);
+
+        limpiarPantalla();
 
         switch (opcion) {
             case 1:
@@ -121,7 +131,7 @@ int main() {
                     printf("Ingrese el numero de cliente para el calculo de eficiencia: ");
                     scanf("%d", &numeroCliente);
                     if (numeroCliente < 1 || numeroCliente > registro.cantidad) {
-                        printf("Numero de cliente inválido.\n");
+                        printf("Numero de cliente invalido.\n");
                     } else {
                         printf("Ingrese la distancia recorrida (en km): ");
                         scanf("%d", &distancia);
@@ -144,12 +154,17 @@ int main() {
                 cargarDatos(&registro);
                 break;
             case 0:
-                printf("Gracias por utilizar el programa. ¡Hasta luego!\n");
+                printf("Gracias por utilizar el programa onichan UwU. ¡Hasta luego!\n");
                 exit(0);
             default:
                 printf("Opcion invalida. Por favor, ingrese una opcion valida.\n");
                 break;
         }
+
+        getchar();
+        printf("Presione Enter para continuar...");
+        getchar();
+        limpiarPantalla();
     }
 
     return 0;
