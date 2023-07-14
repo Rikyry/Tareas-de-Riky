@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bsY6gu36SVU30cY+E44NFIlspsPDerP25fBQt1hXikWwYLNVL6HQe1MkeeNJYEmD28NJXH9tQXiuhykvFtTISw==",
+  "dgSpecHash": "PgEBNXjmVH9EaR/RmYmYdINxzLdc0Jjo4Kdvr/eknmwUa7J9v/Oo7QF+ZYtOE0ukyaLBpmIUZ79Mox3ppAcxqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rikir\\source\\repos\\CalculadoraRiky01\\Calculadora\\Calculadora.csproj",
+  "projectFilePath": "D:\\Tareas-de-Riky\\TAREAS\\TAREAS\\OTROS\\CALCULADORA\\CalculadoraRiky01\\Calculadora\\Calculadora.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rikir\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
     "C:\\Users\\rikir\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rikir\\Source\\Repos\\CalculadoraRiky01\\Calculadora\\Calculadora.csproj",
+      "projectUniqueName": "D:\\Tareas-de-Riky\\TAREAS\\TAREAS\\OTROS\\CALCULADORA\\CalculadoraRiky01\\Calculadora\\Calculadora.csproj",
       "projectName": "Calculadora",
-      "projectPath": "C:\\Users\\rikir\\Source\\Repos\\CalculadoraRiky01\\Calculadora\\Calculadora.csproj",
+      "projectPath": "D:\\Tareas-de-Riky\\TAREAS\\TAREAS\\OTROS\\CALCULADORA\\CalculadoraRiky01\\Calculadora\\Calculadora.csproj",
       "packagesPath": "C:\\Users\\rikir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rikir\\Source\\Repos\\CalculadoraRiky01\\Calculadora\\obj\\",
+      "outputPath": "D:\\Tareas-de-Riky\\TAREAS\\TAREAS\\OTROS\\CALCULADORA\\CalculadoraRiky01\\Calculadora\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

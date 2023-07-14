@@ -102,12 +102,12 @@ namespace Calculadora
 
             if (texto.StartsWith("-"))
             {
-                
+
                 texto = texto.Substring(1);
             }
             else
             {
-        
+
                 texto = "-" + texto;
             }
 

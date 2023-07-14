@@ -274,13 +274,15 @@ namespace Calculadora
             // 
             // btnResultado
             // 
+            btnResultado.BackColor = System.Drawing.SystemColors.ActiveCaption;
             btnResultado.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnResultado.ForeColor = System.Drawing.SystemColors.ControlText;
             btnResultado.Location = new System.Drawing.Point(166, 259);
             btnResultado.Name = "btnResultado";
             btnResultado.Size = new System.Drawing.Size(96, 45);
             btnResultado.TabIndex = 19;
             btnResultado.Text = "=";
-            btnResultado.UseVisualStyleBackColor = true;
+            btnResultado.UseVisualStyleBackColor = false;
             btnResultado.Click += btnResultado_Click;
             // 
             // btnPunto
