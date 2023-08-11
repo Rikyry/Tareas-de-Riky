@@ -5,12 +5,13 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using LiteDB;
+using System.IO;
 
 namespace Rixpert
 {
     public partial class FrmMenu : Form
     {
-        private string dbPath = "Rizxpert.db"; // Ruta para la base de datos LiteDB
+        private string dbPath = "Risxpert.db"; // Ruta para la base de datos LiteDB
         private LiteDatabase db;
         private int currentPhase = 1; // Variable para rastrear la fase actual
         private DataTable dataTableFase1; // Tabla para almacenar los datos de la primera fase
@@ -21,72 +22,70 @@ namespace Rixpert
         public FrmMenu()
         {
             InitializeComponent();
-            db = new LiteDatabase(dbPath);
+            db = new LiteDatabase(dbPath); 
+
+            TxtAnalista1.TextChanged += TxtAnalista1_TextChanged;
+
             ControlFases.Selected += ControlFases_Selected;
-
-            BtnAgregar1.Click += BtnAgregar1_Click;
-
-            TxtAnalista1.TextChanged += TxtAnalista_TextChanged;
-            TxtAnalista2.TextChanged += TxtAnalista_TextChanged;
-            TxtAnalista3.TextChanged += TxtAnalista_TextChanged;
-            TxtAnalista4.TextChanged += TxtAnalista_TextChanged;
-
-            TxtAnalista1.Enter += TxtAnalista1_Enter;
 
             BtnFase01.Click += BtnFase01_Click;
             BtnFase02.Click += BtnFase02_Click;
             BtnFase03.Click += BtnFase03_Click;
             BtnFase04.Click += BtnFase04_Click;
 
-            BtnGuardar.Click += BtnGuardar_Click;
-            BtnGuardar2.Click += BtGuardar2_Click;
+            BtnGuardar1.Click += BtnGuardar1_Click;
+            BtnGuardar2.Click += BtnGuardar2_Click;
             BtnGuardar3.Click += BtnGuardar3_Click;
             BtnGuardar4.Click += BtnGuardar4_Click;
 
             // Agregar columnas a DataGridFase1
             dataTableFase1 = new DataTable();
             dataTableFase1.Columns.Add("ID", typeof(string));
-            dataTableFase1.Columns.Add("Activo", typeof(string));
-            dataTableFase1.Columns.Add("Riesgo", typeof(string));
-            dataTableFase1.Columns.Add("Daño", typeof(string));
+            dataTableFase1.Columns.Add("ANALISTA", typeof(string));
+            dataTableFase1.Columns.Add("RIESGO", typeof(string));
+            dataTableFase1.Columns.Add("ACTIVO", typeof(string));
+            dataTableFase1.Columns.Add("DAÑO", typeof(string));
 
             // Agregar columnas a DataGridFase2
             dataTableFase2 = new DataTable();
             dataTableFase2.Columns.Add("ID", typeof(string));
-            dataTableFase2.Columns.Add("Activo", typeof(string));
-            dataTableFase2.Columns.Add("Riesgo", typeof(string));
-            dataTableFase2.Columns.Add("Daño", typeof(string));
+            dataTableFase2.Columns.Add("ANALISTA", typeof(string));
+            dataTableFase2.Columns.Add("RIESGO", typeof(string));
+            dataTableFase2.Columns.Add("ACTIVO", typeof(string));
+            dataTableFase2.Columns.Add("DAÑO", typeof(string));
             dataTableFase2.Columns.Add("S", typeof(int));
             dataTableFase2.Columns.Add("F", typeof(int));
             dataTableFase2.Columns.Add("P", typeof(int));
             dataTableFase2.Columns.Add("A", typeof(int));
             dataTableFase2.Columns.Add("V", typeof(int));
-            dataTableFase2.Columns.Add("E", typeof(int));
+            dataTableFase2.Columns.Add("E", typeof(int)); 
 
             // Agregar columnas a DataGridFase3
             dataTableFase3 = new DataTable();
             dataTableFase3.Columns.Add("ID", typeof(string));
-            dataTableFase3.Columns.Add("Activo", typeof(string));
-            dataTableFase3.Columns.Add("Riesgo", typeof(string));
-            dataTableFase3.Columns.Add("Daño", typeof(string));
+            dataTableFase3.Columns.Add("ANALISTA", typeof(string));
+            dataTableFase3.Columns.Add("RIESGO", typeof(string));
+            dataTableFase3.Columns.Add("ACTIVO", typeof(string));
+            dataTableFase3.Columns.Add("DAÑO", typeof(string));
             dataTableFase3.Columns.Add("S", typeof(int));
             dataTableFase3.Columns.Add("F", typeof(int));
             dataTableFase3.Columns.Add("P", typeof(int));
             dataTableFase3.Columns.Add("A", typeof(int));
             dataTableFase3.Columns.Add("V", typeof(int));
-            dataTableFase3.Columns.Add("E", typeof(int)); 
+            dataTableFase3.Columns.Add("E", typeof(int));
             dataTableFase3.Columns.Add("I", typeof(int));
-            dataTableFase3.Columns.Add("C", typeof(int));
             dataTableFase3.Columns.Add("D", typeof(int));
+            dataTableFase3.Columns.Add("C", typeof(int));
             dataTableFase3.Columns.Add("PB", typeof(int));
             dataTableFase3.Columns.Add("ER", typeof(int));
 
             // Agregar columnas a DataGridFase4
             dataTableFase4 = new DataTable();
             dataTableFase4.Columns.Add("ID", typeof(string));
-            dataTableFase4.Columns.Add("Activo", typeof(string));
-            dataTableFase4.Columns.Add("Riesgo", typeof(string));
-            dataTableFase4.Columns.Add("Daño", typeof(string));
+            dataTableFase4.Columns.Add("ANALISTA", typeof(string));
+            dataTableFase4.Columns.Add("RIESGO", typeof(string));
+            dataTableFase4.Columns.Add("ACTIVO", typeof(string));
+            dataTableFase4.Columns.Add("DAÑO", typeof(string));
             dataTableFase4.Columns.Add("S", typeof(int));
             dataTableFase4.Columns.Add("F", typeof(int));
             dataTableFase4.Columns.Add("P", typeof(int));
@@ -94,12 +93,12 @@ namespace Rixpert
             dataTableFase4.Columns.Add("V", typeof(int));
             dataTableFase4.Columns.Add("E", typeof(int));
             dataTableFase4.Columns.Add("I", typeof(int));
-            dataTableFase4.Columns.Add("C", typeof(int));
             dataTableFase4.Columns.Add("D", typeof(int));
+            dataTableFase4.Columns.Add("C", typeof(int));
             dataTableFase4.Columns.Add("PB", typeof(int));
             dataTableFase4.Columns.Add("ER", typeof(int));
-            dataTableFase4.Columns.Add("Gravedad", typeof(string));
-            dataTableFase4.Columns.Add("Mitigación", typeof(string));
+            dataTableFase4.Columns.Add("GRAVEDAD", typeof(string));
+            dataTableFase4.Columns.Add("MITIGACIÓN", typeof(string));
 
             // Asignar los DataTable a las DataGridView correspondientes
             DataGridFase1.DataSource = dataTableFase1;
@@ -107,6 +106,64 @@ namespace Rixpert
             DataGridFase3.DataSource = dataTableFase3;
             DataGridFase4.DataSource = dataTableFase4;
 
+            // Establecer las columnas no editables en DataGridFase1
+            DataGridFase1.Columns["ID"].ReadOnly = false;
+            DataGridFase1.Columns["ANALISTA"].ReadOnly = false;
+            DataGridFase1.Columns["RIESGO"].ReadOnly = false;
+            DataGridFase1.Columns["ACTIVO"].ReadOnly = false;
+            DataGridFase1.Columns["DAÑO"].ReadOnly = false;
+
+            // Establecer las columnas no editables en DataGridFase2
+            DataGridFase2.Columns["ID"].ReadOnly = true;
+            DataGridFase2.Columns["ANALISTA"].ReadOnly = true;
+            DataGridFase2.Columns["RIESGO"].ReadOnly = true;
+            DataGridFase2.Columns["ACTIVO"].ReadOnly = true;
+            DataGridFase2.Columns["DAÑO"].ReadOnly = true;
+            DataGridFase2.Columns["S"].ReadOnly = false;
+            DataGridFase2.Columns["F"].ReadOnly = false;
+            DataGridFase2.Columns["P"].ReadOnly = false;
+            DataGridFase2.Columns["A"].ReadOnly = false;
+            DataGridFase2.Columns["V"].ReadOnly = false;
+            DataGridFase2.Columns["E"].ReadOnly = false; 
+
+
+            // Establecer las columnas no editables en DataGridFase3
+            DataGridFase3.Columns["ID"].ReadOnly = true;
+            DataGridFase3.Columns["ANALISTA"].ReadOnly = true;
+            DataGridFase3.Columns["RIESGO"].ReadOnly = true;
+            DataGridFase3.Columns["ACTIVO"].ReadOnly = true;
+            DataGridFase3.Columns["DAÑO"].ReadOnly = true;
+            DataGridFase3.Columns["S"].ReadOnly = true;
+            DataGridFase3.Columns["F"].ReadOnly = true;
+            DataGridFase3.Columns["P"].ReadOnly = true;
+            DataGridFase3.Columns["A"].ReadOnly = true;
+            DataGridFase3.Columns["V"].ReadOnly = true;
+            DataGridFase3.Columns["E"].ReadOnly = true;
+            DataGridFase3.Columns["I"].ReadOnly = true;
+            DataGridFase3.Columns["D"].ReadOnly = true;
+            DataGridFase3.Columns["C"].ReadOnly = true;
+            DataGridFase3.Columns["PB"].ReadOnly = true;
+            DataGridFase3.Columns["ER"].ReadOnly = true;
+
+            // Establecer las columnas no editables en DataGridFase4
+            DataGridFase4.Columns["ID"].ReadOnly = true;
+            DataGridFase4.Columns["ANALISTA"].ReadOnly = true;
+            DataGridFase4.Columns["RIESGO"].ReadOnly = true;
+            DataGridFase4.Columns["ACTIVO"].ReadOnly = true;
+            DataGridFase4.Columns["DAÑO"].ReadOnly = true;
+            DataGridFase4.Columns["S"].ReadOnly = true;
+            DataGridFase4.Columns["F"].ReadOnly = true;
+            DataGridFase4.Columns["P"].ReadOnly = true;
+            DataGridFase4.Columns["A"].ReadOnly = true;
+            DataGridFase4.Columns["V"].ReadOnly = true;
+            DataGridFase4.Columns["E"].ReadOnly = true;
+            DataGridFase4.Columns["I"].ReadOnly = true;
+            DataGridFase4.Columns["D"].ReadOnly = true;
+            DataGridFase4.Columns["C"].ReadOnly = true;
+            DataGridFase4.Columns["PB"].ReadOnly = true;
+            DataGridFase4.Columns["ER"].ReadOnly = true;
+            DataGridFase4.Columns["GRAVEDAD"].ReadOnly = true;
+            DataGridFase4.Columns["MITIGACIÓN"].ReadOnly = true;
 
             // Evento CellEndEdit para calcular el ID en DataGridFase1
             DataGridFase1.CellEndEdit += DataGridFase1_CellEndEdit;
@@ -117,17 +174,20 @@ namespace Rixpert
             // Evento CellValueChanged para actualizar el color en DataGridFase2
             DataGridFase2.CellValueChanged += DataGridFase2_CellValueChanged;
 
-            // Evento CellValueChanged para realizar cálculos en DataGridFase3
-            DataGridFase3.CellValueChanged += DataGridFase3_CellValueChanged;
-
-            // Evento CellValueChanged para clasificar la gravedad en DataGridFase4
-            DataGridFase4.CellValueChanged += DataGridFase4_CellValueChanged;
-
             // Evento CellFormatting para DataGridFase3
             DataGridFase3.CellFormatting += DataGridFase3_CellFormatting;
 
             // Evento CellFormatting para DataGridFase4
             DataGridFase4.CellFormatting += DataGridFase4_CellFormatting;
+        }
+
+        private void TxtAnalista1_TextChanged(object sender, EventArgs e)
+        {
+            string texto = TxtAnalista1.Text;
+            // Actualizar los otros TextBoxes en un bloque de actualización
+            TxtAnalista2.BeginInvoke(new Action(() => TxtAnalista2.Text = texto));
+            TxtAnalista3.BeginInvoke(new Action(() => TxtAnalista3.Text = texto));
+            TxtAnalista4.BeginInvoke(new Action(() => TxtAnalista4.Text = texto));
         }
 
         private void ControlFases_Selected(object sender, TabControlEventArgs e)
@@ -137,8 +197,6 @@ namespace Rixpert
             BtnFase02.Enabled = currentPhase != 2;
             BtnFase03.Enabled = currentPhase != 3;
             BtnFase04.Enabled = currentPhase != 4;
-
-            CargarContenidoDesdeDB();
         }
 
         private List<object> nuevaFilaDataGridFase1 = new List<object>();
@@ -164,70 +222,20 @@ namespace Rixpert
             // Seleccionar la nueva fila para que el usuario pueda editarla
             DataGridFase1.CurrentCell = DataGridFase1.Rows[nuevaFilaIndex].Cells[0];
         }
-
-        private void TxtAnalista_TextChanged(object sender, EventArgs e)
+        private void BtnEliminar1_Click(object sender, EventArgs e)
         {
-            TextBox textBox = sender as TextBox;
-            TxtAnalista2.Text = TxtAnalista1.Text;
-            TxtAnalista3.Text = TxtAnalista1.Text;
-            TxtAnalista4.Text = TxtAnalista1.Text;
-
-            string clave = "Analista" + textBox.Name[textBox.Name.Length - 1];
-            GuardarContenidoEnDB(clave, textBox.Text);
-        }
-
-        private void TxtAnalista1_Enter(object sender, EventArgs e)
-        {
-            if (TxtAnalista1.Text == "Analista")
+            if (DataGridFase1.Rows.Count > 0)
             {
-                TxtAnalista1.Text = "";
+                // Encuentra el índice de la última fila
+                int lastRowIndex = DataGridFase1.Rows.Count - 1;
+
+                // Remueve la fila del DataGridView
+                DataGridFase1.Rows.RemoveAt(lastRowIndex);
             }
-        }
-
-        private void GuardarContenidoEnDB(string clave, string contenido)
-        {
-            var collection = db.GetCollection<BsonDocument>("analistas");
-            var doc = new BsonDocument
+            else
             {
-                { clave, contenido }
-            };
-            collection.Upsert(doc);
-        }
-
-        private void CargarContenidoDesdeDB()
-        {
-            var collection = db.GetCollection<BsonDocument>("analistas");
-            var doc = collection.FindOne(Query.All(Query.Ascending));
-            if (doc != null)
-            {
-                TxtAnalista1.Text = doc["Analista1"].AsString;
-                TxtAnalista2.Text = doc["Analista2"].AsString;
-                TxtAnalista3.Text = doc["Analista3"].AsString;
-                TxtAnalista4.Text = doc["Analista4"].AsString;
-
-                TxtAnalista1.Enabled = true;
-                TxtAnalista2.Enabled = false;
-                TxtAnalista3.Enabled = false;
-                TxtAnalista4.Enabled = false;
+                MessageBox.Show("No hay filas para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        // Método para actualizar los demás DataGridFases con los datos de la nueva fila
-        private void ActualizarDataGridFases()
-        {
-            // Limpiar los DataGridFase2, DataGridFase3 y DataGridFase4
-            DataGridFase2.Rows.Clear();
-            DataGridFase3.Rows.Clear();
-            DataGridFase4.Rows.Clear();
-
-            // Agregar la nueva fila a DataGridFase2
-            DataGridFase2.Rows.Add(nuevaFilaDataGridFase1.ToArray());
-
-            // Agregar la nueva fila a DataGridFase3
-            DataGridFase3.Rows.Add(nuevaFilaDataGridFase1.ToArray());
-
-            // Agregar la nueva fila a DataGridFase4
-            DataGridFase4.Rows.Add(nuevaFilaDataGridFase1.ToArray());
         }
 
         private void DataGridFase1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -241,9 +249,6 @@ namespace Rixpert
                 {
                     nuevaFilaDataGridFase1.Add(cell.Value);
                 }
-
-                // Actualizar los demás DataGridFases con los datos de la nueva fila
-                ActualizarDataGridFases();
             }
 
             if (e.ColumnIndex == DataGridFase1.Columns["Riesgo"].Index)
@@ -273,32 +278,67 @@ namespace Rixpert
             }
             return count;
         }
-
+        private int faseMaximaAlcanzada = 1;
         private void BtnFase01_Click(object sender, EventArgs e)
         {
             currentPhase = 1;
             ControlFases.SelectedTab = FrmFase01;
+            HabilitarBotonesFase();
         }
 
         private void BtnFase02_Click(object sender, EventArgs e)
         {
-            currentPhase = 2;
-            ControlFases.SelectedTab = FrmFase02;
+            if (faseMaximaAlcanzada >= 2)
+            {
+                currentPhase = 2;
+                ControlFases.SelectedTab = FrmFase02;
+                HabilitarBotonesFase();
+            }
+            else
+            {
+                MessageBox.Show("Completa las fases anteriores antes de pasar a la Fase 02.");
+            }
         }
 
         private void BtnFase03_Click(object sender, EventArgs e)
         {
-            currentPhase = 3;
-            ControlFases.SelectedTab = FrmFase03;
+            if (faseMaximaAlcanzada >= 3)
+            {
+                currentPhase = 3;
+                ControlFases.SelectedTab = FrmFase03;
+                HabilitarBotonesFase();
+            }
+            else
+            {
+                MessageBox.Show("Completa las fases anteriores antes de pasar a la Fase 03.");
+            }
         }
 
         private void BtnFase04_Click(object sender, EventArgs e)
         {
-            currentPhase = 4;
-            ControlFases.SelectedTab = FrmFase04;
+            if (faseMaximaAlcanzada >= 4)
+            {
+                currentPhase = 4;
+                ControlFases.SelectedTab = FrmFase04;
+                HabilitarBotonesFase();
+            }
+            else
+            {
+                MessageBox.Show("Completa las fases anteriores antes de pasar a la Fase 04.");
+            }
         }
-
-        private void BtnGuardar_Click(object sender, EventArgs e)
+        private void HabilitarBotonesFase()
+        {
+            BtnFase01.Enabled = faseMaximaAlcanzada >= 1;
+            BtnFase02.Enabled = faseMaximaAlcanzada >= 2;
+            BtnFase03.Enabled = faseMaximaAlcanzada >= 3;
+            BtnFase04.Enabled = faseMaximaAlcanzada >= 4;
+        }
+        private void Formulario_Load(object sender, EventArgs e)
+        {
+            HabilitarBotonesFase();
+        }
+        private void BtnGuardar1_Click(object sender, EventArgs e)
         {
             if (currentPhase == 1)
             {
@@ -311,6 +351,10 @@ namespace Rixpert
                 }
             }
 
+            // Realizar el proceso de guardar para la fase 01
+            faseMaximaAlcanzada = Math.Max(faseMaximaAlcanzada, 1);
+            HabilitarBotonesFase();
+
             // Solo avanzar a la fase 2 si se hizo clic en el botón de guardar de la fase 1
             if (currentPhase == 1)
             {
@@ -319,24 +363,93 @@ namespace Rixpert
             }
         }
 
-        private void BtGuardar2_Click(object sender, EventArgs e)
+        private bool AreRequiredCellsFilled(int rowIndex)
         {
-            if (currentPhase == 2)
+           DataGridViewRow dataGridFase2Row = DataGridFase2.Rows[rowIndex];
+           return dataGridFase2Row.Cells["S"].Value != DBNull.Value &&
+           dataGridFase2Row.Cells["F"].Value != DBNull.Value &&
+           dataGridFase2Row.Cells["P"].Value != DBNull.Value &&
+           dataGridFase2Row.Cells["A"].Value != DBNull.Value &&
+           dataGridFase2Row.Cells["V"].Value != DBNull.Value &&
+           dataGridFase2Row.Cells["E"].Value != DBNull.Value;
+         }
+        private void DataGridFase2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex >= DataGridFase2.Columns["S"].Index && e.ColumnIndex <= DataGridFase2.Columns["E"].Index)
             {
-                BtnFase02.BackColor = Color.FromArgb(49, 189, 79);
-                // Transferir datos de DataGridFase2 a DataGridFase3
-                foreach (DataRow row in dataTableFase2.Rows)
+                string inputValue = e.FormattedValue.ToString();
+
+                // Try to parse the input value as an integer
+                if (!int.TryParse(inputValue, out int numericValue))
                 {
-                    DataRow newRow = dataTableFase3.Rows.Add();
-                    newRow.ItemArray = row.ItemArray.Clone() as object[];
+                    e.Cancel = true; // Cancel the edit if the value is not numeric
+                    MessageBox.Show("Inserte valor numérico.", "Valor no Válido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Check if the value is within the desired range (1 to 5)
+                if (numericValue < 1 || numericValue > 5)
+                {
+                    e.Cancel = true; // Cancel the edit if the value is not within the desired range
+                    MessageBox.Show("Inserte valor entre 1 y 5.", "Valor no Válido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void BtnGuardar2_Click(object sender, EventArgs e)
+        {
+            for (int rowIndex = 0; rowIndex < DataGridFase2.Rows.Count; rowIndex++)
+            {
+                if (!AreRequiredCellsFilled(rowIndex))
+                {
+                    MessageBox.Show("Debe completar todas las celdas requeridas (S, F, P, A, V, E) antes de guardar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
 
-            // Solo avanzar a la fase 3 si se hizo clic en el botón de guardar de la fase 2
             if (currentPhase == 2)
             {
-                currentPhase++;
-                ControlFases.SelectedIndex = currentPhase - 1;
+                BtnFase02.BackColor = Color.FromArgb(49, 189, 79);
+
+                foreach (DataGridViewRow row in DataGridFase2.Rows)
+                {
+                    int S = Convert.ToInt32(row.Cells["S"].Value);
+                    int F = Convert.ToInt32(row.Cells["F"].Value);
+                    int P = Convert.ToInt32(row.Cells["P"].Value);
+                    int A = Convert.ToInt32(row.Cells["A"].Value);
+                    int V = Convert.ToInt32(row.Cells["V"].Value);
+                    int E = Convert.ToInt32(row.Cells["E"].Value);
+
+                    int I = F * S;
+                    int D = P * E;
+                    int C = I + D;
+                    int PB = A * V;
+                    int ER = C * PB;
+
+                    DataRow newRow = dataTableFase3.NewRow();
+
+                    newRow["ID"] = row.Cells["ID"].Value;
+                    newRow["ANALISTA"] = row.Cells["ANALISTA"].Value;
+                    newRow["RIESGO"] = row.Cells["RIESGO"].Value;
+                    newRow["ACTIVO"] = row.Cells["ACTIVO"].Value;
+                    newRow["DAÑO"] = row.Cells["DAÑO"].Value;
+                    newRow["S"] = S;
+                    newRow["F"] = F;
+                    newRow["P"] = P;
+                    newRow["A"] = A;
+                    newRow["V"] = V;
+                    newRow["E"] = E;
+                    newRow["I"] = I;
+                    newRow["D"] = D;
+                    newRow["C"] = C;
+                    newRow["PB"] = PB;
+                    newRow["ER"] = ER;
+
+                    dataTableFase3.Rows.Add(newRow);
+                }
+
+                // Cambiar a la pestaña de DataGridFase3 después de guardar
+                ControlFases.SelectedIndex = 2; // Cambiar al índice de la pestaña tres
             }
         }
 
@@ -345,8 +458,12 @@ namespace Rixpert
             if (currentPhase == 3)
             {
                 BtnFase03.BackColor = Color.FromArgb(49, 189, 79);
+
                 // Transferir datos de DataGridFase3 a DataGridFase4
                 TransferirCalculosDesdeFase3();
+
+                // Calcular y mostrar la clasificación de gravedad en DataGridFase4
+                CalcularYMostrarGravedadEnDataGridFase4();
             }
 
             // Solo avanzar a la fase 4 si se hizo clic en el botón de guardar de la fase 3
@@ -357,6 +474,32 @@ namespace Rixpert
             }
         }
 
+        private void CalcularYMostrarGravedadEnDataGridFase4()
+        {
+            foreach (DataGridViewRow row in DataGridFase4.Rows)
+            {
+                int valorER = Convert.ToInt32(row.Cells["ER"].Value);
+                string gravedad = CalcularClasificacionGravedad(valorER);
+                row.Cells["Gravedad"].Value = gravedad;
+            }
+        }
+
+        private string CalcularClasificacionGravedad(int valorER)
+        {
+            if (valorER >= 2 && valorER <= 250)
+                return "Muy pequeña";
+            else if (valorER >= 251 && valorER <= 500)
+                return "Pequeña";
+            else if (valorER >= 501 && valorER <= 750)
+                return "Normal";
+            else if (valorER >= 751 && valorER <= 1000)
+                return "Grave";
+            else if (valorER >= 1001 && valorER <= 1500)
+                return "Muy Grave";
+
+            return string.Empty;
+        }
+
         private void BtnGuardar4_Click(object sender, EventArgs e)
         {
             if (currentPhase == 4)
@@ -365,49 +508,6 @@ namespace Rixpert
             }
 
             // No hay necesidad de avanzar a otra fase en el botón de guardar de la fase 4
-        }
-        private void ActualizarColoresFase3YFase4(int fila)
-        {
-            // Obtener los valores de las celdas S, F, P, A, V y E en DataGridFase2
-            int? valorS = ObtenerValorNumerico(DataGridFase2.Rows[fila].Cells["S"].Value);
-            int? valorF = ObtenerValorNumerico(DataGridFase2.Rows[fila].Cells["F"].Value);
-            int? valorP = ObtenerValorNumerico(DataGridFase2.Rows[fila].Cells["P"].Value);
-            int? valorA = ObtenerValorNumerico(DataGridFase2.Rows[fila].Cells["A"].Value);
-            int? valorV = ObtenerValorNumerico(DataGridFase2.Rows[fila].Cells["V"].Value);
-            int? valorE = ObtenerValorNumerico(DataGridFase2.Rows[fila].Cells["E"].Value);
-
-            // Establecer los colores correspondientes en DataGridFase3
-            EstablecerColorEnCelda(DataGridFase3.Rows[fila].Cells["S"], valorS);
-            EstablecerColorEnCelda(DataGridFase3.Rows[fila].Cells["F"], valorF);
-            EstablecerColorEnCelda(DataGridFase3.Rows[fila].Cells["P"], valorP);
-            EstablecerColorEnCelda(DataGridFase3.Rows[fila].Cells["A"], valorA);
-            EstablecerColorEnCelda(DataGridFase3.Rows[fila].Cells["V"], valorV);
-            EstablecerColorEnCelda(DataGridFase3.Rows[fila].Cells["E"], valorE);
-
-            // Establecer los colores correspondientes en DataGridFase4
-            EstablecerColorEnCelda(DataGridFase4.Rows[fila].Cells["S"], valorS);
-            EstablecerColorEnCelda(DataGridFase4.Rows[fila].Cells["F"], valorF);
-            EstablecerColorEnCelda(DataGridFase4.Rows[fila].Cells["P"], valorP);
-            EstablecerColorEnCelda(DataGridFase4.Rows[fila].Cells["A"], valorA);
-            EstablecerColorEnCelda(DataGridFase4.Rows[fila].Cells["V"], valorV);
-            EstablecerColorEnCelda(DataGridFase4.Rows[fila].Cells["E"], valorE);
-        }
-
-        private int? ObtenerValorNumerico(object valor)
-        {
-            // Si el valor es DBNull o nulo, devolver null
-            if (valor == DBNull.Value || valor == null)
-            {
-                return null;
-            }
-
-            // Si es un entero válido, devolver el valor numérico
-            if (int.TryParse(valor.ToString(), out int resultado))
-            {
-                return resultado;
-            }
-
-            return null;
         }
 
         private void EstablecerColorEnCelda(DataGridViewCell celda, int? valor)
@@ -440,252 +540,53 @@ namespace Rixpert
                     return Color.White;
             }
         }
+        private void DataGridFase1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == DataGridFase1.Columns["ANALISTA"].Index)
+            {
+                string analistaValue = DataGridFase1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                TxtAnalista1.Text = analistaValue;
+            }
+        }
 
         private void DataGridFase2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Asegurarse de que se haya modificado una fila válida
-            {
-                // Actualizar los colores en DataGridFase3 y DataGridFase4
-                ActualizarColoresFase3YFase4(e.RowIndex);
-            }
-
-            // Actualizar el color de las celdas en la columna "S", "F", "P", "A", "V" y "E"
             if (e.RowIndex >= 0 && e.ColumnIndex >= DataGridFase2.Columns["S"].Index && e.ColumnIndex <= DataGridFase2.Columns["E"].Index)
             {
-                object cellValue = DataGridFase2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                int valor = 0;
-                if (cellValue != null && cellValue != DBNull.Value)
-                {
-                    valor = Convert.ToInt32(cellValue);
-                }
+                UpdateCellColor(e.RowIndex, e.ColumnIndex);
+            }
+        }
 
-                Color color = valor switch
-                {
-                    1 => Color.FromArgb(49, 189, 79), // Verde
-                    2 => Color.FromArgb(255, 255, 0), // Amarillo
-                    3 => Color.FromArgb(255, 165, 0), // Naranja
-                    4 => Color.FromArgb(255, 69, 0),  // Rojo
-                    5 => Color.FromArgb(128, 0, 0),   // Marrón
-                    _ => Color.White,
-                };
-
-                DataGridFase2.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = color;
-
-                // Transferir el valor y el color a DataGridFase3 y DataGridFase4
-                string columnName = DataGridFase2.Columns[e.ColumnIndex].Name;
-                int rowIndex = e.RowIndex;
-
-                // Asegurar que las filas existan en dataTableFase3 y dataTableFase4 antes de acceder a ellas
-                if (dataTableFase3.Rows.Count <= rowIndex)
-                {
-                    dataTableFase3.Rows.Add(dataTableFase2.Rows[rowIndex].ItemArray);
-                }
-
-                if (dataTableFase4.Rows.Count <= rowIndex)
-                {
-                    dataTableFase4.Rows.Add(dataTableFase2.Rows[rowIndex].ItemArray);
-                }
-
-                DataGridFase3.Rows[e.RowIndex].Cells[columnName].Value = valor;
-                DataGridFase3.Rows[e.RowIndex].Cells[columnName].Style.BackColor = color;
-
-                DataGridFase4.Rows[e.RowIndex].Cells[columnName].Value = valor;
-                DataGridFase4.Rows[e.RowIndex].Cells[columnName].Style.BackColor = color;
-
-                // Actualizar la tabla interna dataTableFase3 y dataTableFase4 con el nuevo valor y color
-                dataTableFase3.Rows[rowIndex][columnName] = valor;
-                dataTableFase3.AcceptChanges();
-
-                dataTableFase4.Rows[rowIndex][columnName] = valor;
-                dataTableFase4.AcceptChanges();
-
-                // Verificar si la columna "I" existe en DataGridFase3 y agregarla si no está presente
-                if (!DataGridFase3.Columns.Contains("I"))
-                {
-                    DataGridFase3.Columns.Add("I", "I");
-                }
+        private void UpdateCellColor(int rowIndex, int columnIndex)
+        {
+            object cellValue = DataGridFase2.Rows[rowIndex].Cells[columnIndex].Value;
+            int valor = 0;
+            if (cellValue != null && cellValue != DBNull.Value)
+            {
+                valor = Convert.ToInt32(cellValue);
             }
 
-            // Realizar cálculos adicionales para DataGridFase3 si todas las celdas requeridas tienen valores válidos
-            if (DataGridFase2.Rows[e.RowIndex].Cells["S"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["F"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["P"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["A"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["V"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["E"].Value != DBNull.Value)
+            Color color = valor switch
             {
-                // Realizar los cálculos solo si la columna "I" está presente en DataGridFase3
-                if (DataGridFase3.Columns.Contains("I"))
-                {
-                    int valorF = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["F"].Value);
-                    int valorS = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["S"].Value);
-                    int i = valorF * valorS;
-                    DataGridFase3.Rows[e.RowIndex].Cells["I"].Value = i;
+                1 => Color.FromArgb(49, 189, 79), // Verde
+                2 => Color.FromArgb(255, 255, 0), // Amarillo
+                3 => Color.FromArgb(255, 165, 0), // Naranja
+                4 => Color.FromArgb(255, 69, 0),  // Rojo
+                5 => Color.FromArgb(128, 0, 0),   // Marrón
+                _ => Color.White,
+            };
 
-                    int valorP = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["P"].Value);
-                    int valorE = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["E"].Value);
-                    int d = valorP * valorE;
-                    DataGridFase3.Rows[e.RowIndex].Cells["D"].Value = d;
-
-                    int c = i + d;
-                    DataGridFase3.Rows[e.RowIndex].Cells["C"].Value = c;
-
-                    int valorA = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["A"].Value);
-                    int valorV = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["V"].Value);
-                    int pb = valorA * valorV;
-                    DataGridFase3.Rows[e.RowIndex].Cells["PB"].Value = pb;
-
-                    int er = c * pb;
-                    DataGridFase3.Rows[e.RowIndex].Cells["ER"].Value = er;
-                }
-            } // Actualizar el color de las celdas en la columna "S", "F", "P", "A", "V" y "E"
-            if (e.RowIndex >= 0 && e.ColumnIndex >= DataGridFase2.Columns["S"].Index && e.ColumnIndex <= DataGridFase2.Columns["E"].Index)
-            {
-                object cellValue = DataGridFase2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                int valor = 0;
-                if (cellValue != null && cellValue != DBNull.Value)
-                {
-                    valor = Convert.ToInt32(cellValue);
-                }
-
-                Color color = valor switch
-                {
-                    1 => Color.FromArgb(49, 189, 79), // Verde
-                    2 => Color.FromArgb(255, 255, 0), // Amarillo
-                    3 => Color.FromArgb(255, 165, 0), // Naranja
-                    4 => Color.FromArgb(255, 69, 0),  // Rojo
-                    5 => Color.FromArgb(128, 0, 0),   // Marrón
-                    _ => Color.White,
-                };
-
-                DataGridFase2.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = color;
-
-                // Transferir el valor y el color a DataGridFase3 y DataGridFase4
-                string columnName = DataGridFase2.Columns[e.ColumnIndex].Name;
-                int rowIndex = e.RowIndex;
-
-                // Asegurar que las filas existan en dataTableFase3 y dataTableFase4 antes de acceder a ellas
-                if (dataTableFase3.Rows.Count <= rowIndex)
-                {
-                    dataTableFase3.Rows.Add(dataTableFase2.Rows[rowIndex].ItemArray);
-                }
-
-                if (dataTableFase4.Rows.Count <= rowIndex)
-                {
-                    dataTableFase4.Rows.Add(dataTableFase2.Rows[rowIndex].ItemArray);
-                }
-
-                DataGridFase3.Rows[e.RowIndex].Cells[columnName].Value = valor;
-                DataGridFase3.Rows[e.RowIndex].Cells[columnName].Style.BackColor = color;
-
-                DataGridFase4.Rows[e.RowIndex].Cells[columnName].Value = valor;
-                DataGridFase4.Rows[e.RowIndex].Cells[columnName].Style.BackColor = color;
-
-                // Actualizar la tabla interna dataTableFase3 y dataTableFase4 con el nuevo valor y color
-                dataTableFase3.Rows[rowIndex][columnName] = valor;
-                dataTableFase3.AcceptChanges();
-
-                dataTableFase4.Rows[rowIndex][columnName] = valor;
-                dataTableFase4.AcceptChanges();
-
-                // Verificar si la columna "I" existe en DataGridFase3 y agregarla si no está presente
-                if (!DataGridFase3.Columns.Contains("I"))
-                {
-                    DataGridFase3.Columns.Add("I", "I");
-                }
-            }
-
-            // Realizar cálculos adicionales para DataGridFase3 si todas las celdas requeridas tienen valores válidos
-            if (DataGridFase2.Rows[e.RowIndex].Cells["S"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["F"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["P"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["A"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["V"].Value != DBNull.Value &&
-                DataGridFase2.Rows[e.RowIndex].Cells["E"].Value != DBNull.Value)
-            {
-                // Realizar los cálculos solo si la columna "I" está presente en DataGridFase3
-                if (DataGridFase3.Columns.Contains("I"))
-                {
-                    int valorF = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["F"].Value);
-                    int valorS = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["S"].Value);
-                    int i = valorF * valorS;
-                    DataGridFase3.Rows[e.RowIndex].Cells["I"].Value = i;
-
-                    int valorP = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["P"].Value);
-                    int valorE = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["E"].Value);
-                    int d = valorP * valorE;
-                    DataGridFase3.Rows[e.RowIndex].Cells["D"].Value = d;
-
-                    int c = i + d;
-                    DataGridFase3.Rows[e.RowIndex].Cells["C"].Value = c;
-
-                    int valorA = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["A"].Value);
-                    int valorV = Convert.ToInt32(DataGridFase2.Rows[e.RowIndex].Cells["V"].Value);
-                    int pb = valorA * valorV;
-                    DataGridFase3.Rows[e.RowIndex].Cells["PB"].Value = pb;
-
-                    int er = c * pb;
-                    DataGridFase3.Rows[e.RowIndex].Cells["ER"].Value = er;
-                }
-            }
+            DataGridFase2.Rows[rowIndex].Cells[columnIndex].Style.BackColor = color;
         }
 
         private void DataGridFase3_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            // Realizar cálculos en DataGridFase3
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (e.ColumnIndex == DataGridFase3.Columns["S"].Index || e.ColumnIndex == DataGridFase3.Columns["F"].Index)
-                {
-                    int valorS = Convert.ToInt32(DataGridFase3.Rows[e.RowIndex].Cells["S"].Value);
-                    int valorF = Convert.ToInt32(DataGridFase3.Rows[e.RowIndex].Cells["F"].Value);
-                    int i = valorF * valorS;
-                    DataGridFase3.Rows[e.RowIndex].Cells["C"].Value = i;
-                }
-                else if (e.ColumnIndex == DataGridFase3.Columns["P"].Index || e.ColumnIndex == DataGridFase3.Columns["E"].Index)
-                {
-                    // Verificar si las celdas contienen valores válidos antes de realizar cálculos
-                    object valorP = DataGridFase3.Rows[e.RowIndex].Cells["P"].Value;
-                    object valorE = DataGridFase3.Rows[e.RowIndex].Cells["E"].Value;
-
-                    if (valorP != DBNull.Value && valorE != DBNull.Value)
-                    {
-                        int valorPInt = Convert.ToInt32(valorP);
-                        int valorEInt = Convert.ToInt32(valorE);
-                        int d = valorPInt * valorEInt;
-                        DataGridFase3.Rows[e.RowIndex].Cells["D"].Value = d;
-                    }
-                }
-                else if (e.ColumnIndex == DataGridFase3.Columns["C"].Index || e.ColumnIndex == DataGridFase3.Columns["D"].Index)
-                {
-                    // Verificar si las celdas contienen valores válidos antes de realizar cálculos
-                    object valorC = DataGridFase3.Rows[e.RowIndex].Cells["C"].Value;
-                    object valorD = DataGridFase3.Rows[e.RowIndex].Cells["D"].Value;
-
-                    if (valorC != DBNull.Value && valorD != DBNull.Value)
-                    {
-                        int valorCInt = Convert.ToInt32(valorC);
-                        int valorDInt = Convert.ToInt32(valorD);
-                        int pb = valorCInt + valorDInt;
-                        DataGridFase3.Rows[e.RowIndex].Cells["PB"].Value = pb;
-                    }
-                }
-                else if (e.ColumnIndex == DataGridFase3.Columns["A"].Index || e.ColumnIndex == DataGridFase3.Columns["V"].Index)
-                {
-                    // Verificar si la celda "V" contiene un valor válido antes de realizar el cálculo
-                    object valorV = DataGridFase3.Rows[e.RowIndex].Cells["V"].Value;
-
-                    if (valorV != DBNull.Value)
-                    {
-                        int valorA = Convert.ToInt32(DataGridFase3.Rows[e.RowIndex].Cells["A"].Value);
-                        int valorVInt = Convert.ToInt32(valorV);
-                        int er = valorA * valorVInt;
-                        DataGridFase3.Rows[e.RowIndex].Cells["ER"].Value = er;
-                    }
-
-                }
+                DataGridViewRow row = DataGridFase3.Rows[e.RowIndex];
             }
         }
+
         private void DataGridFase3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -708,30 +609,6 @@ namespace Rixpert
             }
         }
 
-        private void DataGridFase4_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            // Clasificar la gravedad en DataGridFase4
-            if (e.RowIndex >= 0)
-            {
-                if (e.ColumnIndex == DataGridFase4.Columns["ER"].Index)
-                {
-                    int valorER = Convert.ToInt32(DataGridFase4.Rows[e.RowIndex].Cells["ER"].Value);
-                    string gravedad = "";
-                    if (valorER >= 2 && valorER <= 250)
-                        gravedad = "Muy pequeña";
-                    else if (valorER >= 251 && valorER <= 500)
-                        gravedad = "Pequeña";
-                    else if (valorER >= 501 && valorER <= 750)
-                        gravedad = "Normal";
-                    else if (valorER >= 751 && valorER <= 1000)
-                        gravedad = "Grave";
-                    else if (valorER >= 1001 && valorER <= 1500)
-                        gravedad = "Muy Grave";
-
-                    DataGridFase4.Rows[e.RowIndex].Cells["Gravedad"].Value = gravedad;
-                }
-            }
-        }
         private void DataGridFase4_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -753,7 +630,6 @@ namespace Rixpert
                 }
             }
         }
-
             private void TransferirCalculosDesdeFase3()
         {
             dataTableFase4.Clear();
@@ -785,6 +661,54 @@ namespace Rixpert
                 }
                 dataTableFase4.Rows.Add(newRow);
             }
+        }
+
+        private void PictureCerrar_Click(object sender, EventArgs e)
+        {
+            // Cierra la aplicación
+            Application.Exit();
+        }
+
+        private bool pantallaCompleta = false;
+        private FormWindowState estadoAnterior;
+        private void PictureMinimizarYMaximinar_Click(object sender, EventArgs e)
+        {
+            if (pantallaCompleta)
+            {
+                // Si ya está en pantalla completa, restaurar al tamaño anterior
+                this.WindowState = estadoAnterior;
+            }
+            else
+            {
+                // Si no está en pantalla completa, maximizar y guardar el estado anterior
+                estadoAnterior = this.WindowState;
+                this.WindowState = FormWindowState.Maximized;
+            }
+
+            // Cambiar el estado de pantallaCompleta para la próxima vez
+            pantallaCompleta = !pantallaCompleta;
+        }
+        private void PictureReposo_Click(object sender, EventArgs e)
+        {
+            // Ocultar la ventana principal de la aplicación
+            this.Hide();
+
+            // Mostrar el icono en la bandeja del sistema
+            notifyIcon1.Visible = true;
+            notifyIcon1.ShowBalloonTip(500, "Aplicación minimizada", "La aplicación se ha minimizado en la bandeja del sistema.", ToolTipIcon.Info);
+        }
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            // Mostrar la ventana principal de la aplicación
+            this.Show();
+
+            // Ocultar nuevamente el icono en la bandeja del sistema
+            notifyIcon1.Visible = false;
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Asegurarse de que si la aplicación se cierra, también se oculte del ícono en la bandeja del sistema
+            notifyIcon1.Visible = false;
         }
     }
 }
