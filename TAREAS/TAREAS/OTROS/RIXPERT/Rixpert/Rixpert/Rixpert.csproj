@@ -236,17 +236,17 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\FrmMenu.cs">
+    <Compile Include="E:\FrmMenu.cs">
       <Link>FrmMenu.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\FrmMenu.Designer.cs">
+    <Compile Include="E:\FrmMenu.Designer.cs">
       <DependentUpon>FrmMenu.cs</DependentUpon>
       <Link>FrmMenu.Designer.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\FrmMenu.resx">
+    <EmbeddedResource Include="E:\FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
       <Link>FrmMenu.resx</Link>
     </EmbeddedResource>
