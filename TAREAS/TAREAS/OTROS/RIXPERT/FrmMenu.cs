@@ -22,7 +22,9 @@ namespace Rixpert
         public FrmMenu()
         {
             InitializeComponent();
-            db = new LiteDatabase(dbPath); 
+
+            // Inicializar la conexión a la base de datos
+            db = new LiteDatabase("DatosFases.db");
 
             TxtAnalista1.TextChanged += TxtAnalista1_TextChanged;
 
@@ -171,6 +173,9 @@ namespace Rixpert
             // Evento CellEndEdit para calcular el ID en DataGridFase1
             DataGridFase1.CellEndEdit += DataGridFase1_CellEndEdit;
 
+            // Evento CellValueChanged para actualizar datos en DataGridFase1   
+            DataGridFase1.CellValueChanged += DataGridFase1_CellValueChanged;
+
             // Evento CellValueChanged para actualizar el color en DataGridFase2
             DataGridFase2.CellValueChanged += DataGridFase2_CellValueChanged;
 
@@ -238,6 +243,25 @@ namespace Rixpert
             }
         }
 
+        private void LimpiarDataGridFase1YVolverAFase1()
+        {
+            // Limpia el DataGridFase1
+            dataTableFase1.Clear();  
+            
+            // Limpia el DataGridFase2
+            dataTableFase2.Clear();
+
+            // Limpia el DataGridFase3
+            dataTableFase3.Clear();
+
+            // Limpia el DataGridFase4
+            dataTableFase4.Clear();
+
+            // Cambia a la primera fase
+            currentPhase = 1;
+            ControlFases.SelectedTab = FrmFase01;
+        }
+
         private void DataGridFase1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             // Verificar si el valor ha sido cambiado en la nueva fila (la última fila)
@@ -278,6 +302,7 @@ namespace Rixpert
             }
             return count;
         }
+
         private int faseMaximaAlcanzada = 1;
         private void BtnFase01_Click(object sender, EventArgs e)
         {
@@ -327,6 +352,7 @@ namespace Rixpert
                 MessageBox.Show("Completa las fases anteriores antes de pasar a la Fase 04.");
             }
         }
+
         private void HabilitarBotonesFase()
         {
             BtnFase01.Enabled = faseMaximaAlcanzada >= 1;
@@ -334,10 +360,12 @@ namespace Rixpert
             BtnFase03.Enabled = faseMaximaAlcanzada >= 3;
             BtnFase04.Enabled = faseMaximaAlcanzada >= 4;
         }
-        private void Formulario_Load(object sender, EventArgs e)
+
+        private void FrmMenu_Load(object sender, EventArgs e)
         {
             HabilitarBotonesFase();
         }
+
         private void BtnGuardar1_Click(object sender, EventArgs e)
         {
             if (currentPhase == 1)
@@ -363,7 +391,7 @@ namespace Rixpert
             }
         }
 
-        private bool AreRequiredCellsFilled(int rowIndex)
+        private bool RequiereLlenarTodasLasCeldas(int rowIndex)
         {
            DataGridViewRow dataGridFase2Row = DataGridFase2.Rows[rowIndex];
            return dataGridFase2Row.Cells["S"].Value != DBNull.Value &&
@@ -373,6 +401,7 @@ namespace Rixpert
            dataGridFase2Row.Cells["V"].Value != DBNull.Value &&
            dataGridFase2Row.Cells["E"].Value != DBNull.Value;
          }
+
         private void DataGridFase2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.ColumnIndex >= DataGridFase2.Columns["S"].Index && e.ColumnIndex <= DataGridFase2.Columns["E"].Index)
@@ -400,7 +429,7 @@ namespace Rixpert
         {
             for (int rowIndex = 0; rowIndex < DataGridFase2.Rows.Count; rowIndex++)
             {
-                if (!AreRequiredCellsFilled(rowIndex))
+                if (!RequiereLlenarTodasLasCeldas(rowIndex))
                 {
                     MessageBox.Show("Debe completar todas las celdas requeridas (S, F, P, A, V, E) antes de guardar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -474,6 +503,17 @@ namespace Rixpert
             }
         }
 
+        private void BtnGuardar4_Click(object sender, EventArgs e)
+        {
+            if (currentPhase == 4)
+            {
+                BtnFase04.BackColor = Color.FromArgb(49, 189, 79);
+
+                // Limpia y regresa a la fase 1
+                LimpiarDataGridFase1YVolverAFase1();
+            }
+        }
+
         private void CalcularYMostrarGravedadEnDataGridFase4()
         {
             foreach (DataGridViewRow row in DataGridFase4.Rows)
@@ -500,16 +540,6 @@ namespace Rixpert
             return string.Empty;
         }
 
-        private void BtnGuardar4_Click(object sender, EventArgs e)
-        {
-            if (currentPhase == 4)
-            {
-                BtnFase04.BackColor = Color.FromArgb(49, 189, 79);
-            }
-
-            // No hay necesidad de avanzar a otra fase en el botón de guardar de la fase 4
-        }
-
         private void EstablecerColorEnCelda(DataGridViewCell celda, int? valor)
         {
             if (valor != null)
@@ -521,6 +551,7 @@ namespace Rixpert
                 celda.Style.BackColor = Color.White;
             }
         }
+
         private Color ObtenerColorPorValor(int valor)
         {
             // Asignar los colores según el valor
@@ -667,48 +698,6 @@ namespace Rixpert
         {
             // Cierra la aplicación
             Application.Exit();
-        }
-
-        private bool pantallaCompleta = false;
-        private FormWindowState estadoAnterior;
-        private void PictureMinimizarYMaximinar_Click(object sender, EventArgs e)
-        {
-            if (pantallaCompleta)
-            {
-                // Si ya está en pantalla completa, restaurar al tamaño anterior
-                this.WindowState = estadoAnterior;
-            }
-            else
-            {
-                // Si no está en pantalla completa, maximizar y guardar el estado anterior
-                estadoAnterior = this.WindowState;
-                this.WindowState = FormWindowState.Maximized;
-            }
-
-            // Cambiar el estado de pantallaCompleta para la próxima vez
-            pantallaCompleta = !pantallaCompleta;
-        }
-        private void PictureReposo_Click(object sender, EventArgs e)
-        {
-            // Ocultar la ventana principal de la aplicación
-            this.Hide();
-
-            // Mostrar el icono en la bandeja del sistema
-            notifyIcon1.Visible = true;
-            notifyIcon1.ShowBalloonTip(500, "Aplicación minimizada", "La aplicación se ha minimizado en la bandeja del sistema.", ToolTipIcon.Info);
-        }
-        private void notifyIcon1_Click(object sender, EventArgs e)
-        {
-            // Mostrar la ventana principal de la aplicación
-            this.Show();
-
-            // Ocultar nuevamente el icono en la bandeja del sistema
-            notifyIcon1.Visible = false;
-        }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // Asegurarse de que si la aplicación se cierra, también se oculte del ícono en la bandeja del sistema
-            notifyIcon1.Visible = false;
         }
     }
 }

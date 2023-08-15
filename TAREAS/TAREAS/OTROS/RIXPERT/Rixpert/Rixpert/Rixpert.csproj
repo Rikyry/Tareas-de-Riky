@@ -236,19 +236,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="E:\FrmMenu.cs">
+    <Compile Include="..\..\FrmMenu.cs">
       <Link>FrmMenu.cs</Link>
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="E:\FrmMenu.Designer.cs">
+    <Compile Include="..\..\FrmMenu.Designer.cs">
       <DependentUpon>FrmMenu.cs</DependentUpon>
       <Link>FrmMenu.Designer.cs</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="E:\FrmMenu.resx">
+    <EmbeddedResource Include="..\..\FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
       <Link>FrmMenu.resx</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

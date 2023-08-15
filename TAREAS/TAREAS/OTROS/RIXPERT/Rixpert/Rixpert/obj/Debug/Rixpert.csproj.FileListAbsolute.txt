@@ -92,3 +92,6 @@ D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\Rixpert\Rixpert\obj\Debug\Rixpert.
 D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\Rixpert\Rixpert\obj\Debug\Rixpert.csproj.CopyComplete
 D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\Rixpert\Rixpert\obj\Debug\Rixpert.exe
 D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\Rixpert\Rixpert\obj\Debug\Rixpert.pdb
+D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\Rixpert\Rixpert\bin\Debug\FrmMenu.resx
+D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\Rixpert\Rixpert\bin\Debug\FrmMenu.cs
+D:\Tareas-de-Riky\TAREAS\TAREAS\OTROS\RIXPERT\Rixpert\Rixpert\bin\Debug\FrmMenu.Designer.cs
