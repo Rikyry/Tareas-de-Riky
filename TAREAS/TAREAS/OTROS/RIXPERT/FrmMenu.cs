@@ -6,13 +6,14 @@ using System.Linq;
 using System.Windows.Forms;
 using LiteDB;
 using System.IO;
+using System.ComponentModel;
 
 namespace Rixpert
 {
     public partial class FrmMenu : Form
     {
         private string dbPath = "Risxpert.db"; // Ruta para la base de datos LiteDB
-        private LiteDatabase db;
+        private LiteDatabase database;
         private int currentPhase = 1; // Variable para rastrear la fase actual
         private DataTable dataTableFase1; // Tabla para almacenar los datos de la primera fase
         private DataTable dataTableFase2; // Tabla para almacenar los datos de la segunda fase
@@ -22,9 +23,7 @@ namespace Rixpert
         public FrmMenu()
         {
             InitializeComponent();
-
-            // Inicializar la conexión a la base de datos
-            db = new LiteDatabase("DatosFases.db");
+            database = new LiteDatabase("Risk.db"); // Crear o abrir la base de datos "Risk.db"
 
             TxtAnalista1.TextChanged += TxtAnalista1_TextChanged;
 
@@ -35,10 +34,10 @@ namespace Rixpert
             BtnFase03.Click += BtnFase03_Click;
             BtnFase04.Click += BtnFase04_Click;
 
-            BtnGuardar1.Click += BtnGuardar1_Click;
-            BtnGuardar2.Click += BtnGuardar2_Click;
-            BtnGuardar3.Click += BtnGuardar3_Click;
-            BtnGuardar4.Click += BtnGuardar4_Click;
+            BtnContinuar1.Click += BtnContinuar1_Click;
+            BtnContinuar2.Click += BtnContinuar2_Click;
+            BtnContinuar3.Click += BtnContinuar3_Click;
+            BtnContinuar4.Click += BtnContinuar4_Click;
 
             // Agregar columnas a DataGridFase1
             dataTableFase1 = new DataTable();
@@ -60,7 +59,7 @@ namespace Rixpert
             dataTableFase2.Columns.Add("P", typeof(int));
             dataTableFase2.Columns.Add("A", typeof(int));
             dataTableFase2.Columns.Add("V", typeof(int));
-            dataTableFase2.Columns.Add("E", typeof(int)); 
+            dataTableFase2.Columns.Add("E", typeof(int));
 
             // Agregar columnas a DataGridFase3
             dataTableFase3 = new DataTable();
@@ -109,7 +108,7 @@ namespace Rixpert
             DataGridFase4.DataSource = dataTableFase4;
 
             // Establecer las columnas no editables en DataGridFase1
-            DataGridFase1.Columns["ID"].ReadOnly = false;
+            DataGridFase1.Columns["ID"].ReadOnly = true;
             DataGridFase1.Columns["ANALISTA"].ReadOnly = false;
             DataGridFase1.Columns["RIESGO"].ReadOnly = false;
             DataGridFase1.Columns["ACTIVO"].ReadOnly = false;
@@ -126,7 +125,7 @@ namespace Rixpert
             DataGridFase2.Columns["P"].ReadOnly = false;
             DataGridFase2.Columns["A"].ReadOnly = false;
             DataGridFase2.Columns["V"].ReadOnly = false;
-            DataGridFase2.Columns["E"].ReadOnly = false; 
+            DataGridFase2.Columns["E"].ReadOnly = false;
 
 
             // Establecer las columnas no editables en DataGridFase3
@@ -246,8 +245,8 @@ namespace Rixpert
         private void LimpiarDataGridFase1YVolverAFase1()
         {
             // Limpia el DataGridFase1
-            dataTableFase1.Clear();  
-            
+            dataTableFase1.Clear();
+
             // Limpia el DataGridFase2
             dataTableFase2.Clear();
 
@@ -366,7 +365,7 @@ namespace Rixpert
             HabilitarBotonesFase();
         }
 
-        private void BtnGuardar1_Click(object sender, EventArgs e)
+        private void BtnContinuar1_Click(object sender, EventArgs e)
         {
             if (currentPhase == 1)
             {
@@ -393,14 +392,14 @@ namespace Rixpert
 
         private bool RequiereLlenarTodasLasCeldas(int rowIndex)
         {
-           DataGridViewRow dataGridFase2Row = DataGridFase2.Rows[rowIndex];
-           return dataGridFase2Row.Cells["S"].Value != DBNull.Value &&
-           dataGridFase2Row.Cells["F"].Value != DBNull.Value &&
-           dataGridFase2Row.Cells["P"].Value != DBNull.Value &&
-           dataGridFase2Row.Cells["A"].Value != DBNull.Value &&
-           dataGridFase2Row.Cells["V"].Value != DBNull.Value &&
-           dataGridFase2Row.Cells["E"].Value != DBNull.Value;
-         }
+            DataGridViewRow dataGridFase2Row = DataGridFase2.Rows[rowIndex];
+            return dataGridFase2Row.Cells["S"].Value != DBNull.Value &&
+            dataGridFase2Row.Cells["F"].Value != DBNull.Value &&
+            dataGridFase2Row.Cells["P"].Value != DBNull.Value &&
+            dataGridFase2Row.Cells["A"].Value != DBNull.Value &&
+            dataGridFase2Row.Cells["V"].Value != DBNull.Value &&
+            dataGridFase2Row.Cells["E"].Value != DBNull.Value;
+        }
 
         private void DataGridFase2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
@@ -425,7 +424,7 @@ namespace Rixpert
             }
         }
 
-        private void BtnGuardar2_Click(object sender, EventArgs e)
+        private void BtnContinuar2_Click(object sender, EventArgs e)
         {
             for (int rowIndex = 0; rowIndex < DataGridFase2.Rows.Count; rowIndex++)
             {
@@ -482,7 +481,7 @@ namespace Rixpert
             }
         }
 
-        private void BtnGuardar3_Click(object sender, EventArgs e)
+        private void BtnContinuar3_Click(object sender, EventArgs e)
         {
             if (currentPhase == 3)
             {
@@ -503,7 +502,7 @@ namespace Rixpert
             }
         }
 
-        private void BtnGuardar4_Click(object sender, EventArgs e)
+        private void BtnContinuar4_Click(object sender, EventArgs e)
         {
             if (currentPhase == 4)
             {
@@ -661,7 +660,7 @@ namespace Rixpert
                 }
             }
         }
-            private void TransferirCalculosDesdeFase3()
+        private void TransferirCalculosDesdeFase3()
         {
             dataTableFase4.Clear();
 
@@ -698,6 +697,125 @@ namespace Rixpert
         {
             // Cierra la aplicación
             Application.Exit();
+        }
+
+        private void BtnGuardar1_Click(object sender, EventArgs e)
+        {
+            var collection = database.GetCollection("Risk");
+
+            foreach (DataGridViewRow row in DataGridFase4.Rows)
+            {
+                var data = new BsonDocument
+                {
+                    { "ID", row.Cells["ID"].Value.ToString() },
+                    { "ANALISTA", row.Cells["ANALISTA"].Value.ToString() },
+                    { "RIESGO", row.Cells["RIESGO"].Value.ToString() },
+                    { "ACTIVO", row.Cells["ACTIVO"].Value.ToString() },
+                    { "DAÑO", row.Cells["DAÑO"].Value.ToString() },
+                    // ... otros campos
+                };
+
+                collection.Insert(data);
+            }
+
+            MessageBox.Show("Datos guardados en la base de datos.");
+        }
+
+        private void BtnCargar1_Click(object sender, EventArgs e)
+        {
+            string enteredID = PromptForID();
+            if (!string.IsNullOrEmpty(enteredID))
+            {
+                var collection = database.GetCollection("Risk");
+                var data = collection.FindOne(Query.EQ("ID", enteredID));
+
+                if (data != null)
+                {
+                    // Limpiar cualquier filtro de DataGridFase1
+                    if (DataGridFase1.DataSource is BindingSource bindingSource)
+                    {
+                        bindingSource.Filter = "";
+                    }
+
+                    // Limpiar la selección de filas
+                    DataGridFase1.ClearSelection();
+
+                    // Agregar datos al DataGridFase1 utilizando un BindingList
+                    var dataList = new BindingList<DataItem>();
+                    dataList.Add(new DataItem
+                    {
+                        ID = data["ID"].AsString,
+                        ANALISTA = data["ANALISTA"].AsString,
+                        RIESGO = data["RIESGO"].AsString,
+                        ACTIVO = data["ACTIVO"].AsString,
+                        DAÑO = data["DAÑO"].AsString
+                    });
+
+                    // Establecer el DataSource del DataGridFase1
+                    DataGridFase1.DataSource = new BindingSource(dataList, null);
+                }
+                else
+                {
+                    MessageBox.Show("ID no encontrado en la base de datos.");
+                }
+            }
+        }
+
+        // Clase para almacenar los datos
+        public class DataItem
+        {
+            public string ID { get; set; }
+            public string ANALISTA { get; set; }
+            public string RIESGO { get; set; }
+            public string ACTIVO { get; set; }
+            public string DAÑO { get; set; }
+        }
+
+        //Menu para ingresar ID y cargarlo
+        private string PromptForID()
+        {
+            using (Form prompt = new Form())
+            {
+                prompt.Width = 300;
+                prompt.Height = 150;
+                prompt.Text = "Ingresar ID";
+                prompt.BackColor = Color.FromArgb(64, 69, 76); // Color de fondo
+
+                Label lblID = new Label() { Left = 20, Top = 20, Text = "ID:", ForeColor = Color.White };
+                TextBox txtID = new TextBox() { Left = 120, Top = 20, Width = 150, PasswordChar = '\0', MaxLength = 0 };
+
+                // Valor predeterminado y manejo de evento TextChanged
+                string defaultValue = "#"; // Cambia esto al valor predeterminado deseado
+                txtID.Text = defaultValue;
+
+                txtID.TextChanged += (sender, e) =>
+                {
+                    if (txtID.Text == "")
+                    {
+                        txtID.Text = defaultValue;
+                        txtID.Select(txtID.Text.Length, 0); // Coloca el cursor al final
+                    }
+                };
+
+                Button confirmBtn = new Button() { Text = "Confirmar", Left = 110, Width = 80, Top = txtID.Bottom + 20, DialogResult = DialogResult.OK, BackColor = Color.FromArgb(60, 120, 85), ForeColor = Color.White };
+                Button cancelBtn = new Button() { Text = "Cancelar", Left = 200, Width = 80, Top = txtID.Bottom + 20, DialogResult = DialogResult.Cancel, BackColor = Color.FromArgb(60, 120, 85), ForeColor = Color.White };
+
+                confirmBtn.Click += (sender, e) => prompt.Close();
+                cancelBtn.Click += (sender, e) => prompt.Close();
+
+                prompt.Controls.Add(lblID);
+                prompt.Controls.Add(txtID);
+                prompt.Controls.Add(confirmBtn);
+                prompt.Controls.Add(cancelBtn);
+
+                prompt.AcceptButton = confirmBtn;
+                prompt.CancelButton = cancelBtn;
+
+                // Configuración para centrar el formulario en la pantalla
+                prompt.StartPosition = FormStartPosition.CenterScreen;
+
+                return prompt.ShowDialog() == DialogResult.OK ? txtID.Text : null;
+            }
         }
     }
 }

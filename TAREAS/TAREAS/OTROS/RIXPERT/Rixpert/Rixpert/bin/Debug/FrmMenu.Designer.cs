@@ -68,27 +68,29 @@ namespace Rixpert
             this.panel4 = new System.Windows.Forms.Panel();
             this.ControlFases = new System.Windows.Forms.TabControl();
             this.FrmFase01 = new System.Windows.Forms.TabPage();
+            this.BtnCargar1 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.LbFase1 = new System.Windows.Forms.Label();
             this.BtnAgregar1 = new System.Windows.Forms.Button();
             this.BtnEliminar1 = new System.Windows.Forms.Button();
-            this.BtnGuardar1 = new System.Windows.Forms.Button();
+            this.BtnContinuar1 = new System.Windows.Forms.Button();
             this.DataGridFase1 = new System.Windows.Forms.DataGridView();
             this.FrmFase02 = new System.Windows.Forms.TabPage();
             this.DataGridFase2 = new System.Windows.Forms.DataGridView();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.TxtAnalista2 = new System.Windows.Forms.TextBox();
             this.LbFase2 = new System.Windows.Forms.Label();
-            this.BtnGuardar2 = new System.Windows.Forms.Button();
+            this.BtnContinuar2 = new System.Windows.Forms.Button();
             this.FrmFase03 = new System.Windows.Forms.TabPage();
             this.DataGridFase3 = new System.Windows.Forms.DataGridView();
-            this.BtnGuardar3 = new System.Windows.Forms.Button();
+            this.BtnContinuar3 = new System.Windows.Forms.Button();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.TxtAnalista3 = new System.Windows.Forms.TextBox();
             this.LbFase3 = new System.Windows.Forms.Label();
             this.FrmFase04 = new System.Windows.Forms.TabPage();
+            this.BtnGuardar1 = new System.Windows.Forms.Button();
             this.DataGridFase4 = new System.Windows.Forms.DataGridView();
-            this.BtnGuardar4 = new System.Windows.Forms.Button();
+            this.BtnContinuar4 = new System.Windows.Forms.Button();
             this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.TxtAnalista4 = new System.Windows.Forms.TextBox();
             this.LbFase4 = new System.Windows.Forms.Label();
@@ -130,7 +132,7 @@ namespace Rixpert
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Location = new System.Drawing.Point(230, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(970, 80);
+            this.panel3.Size = new System.Drawing.Size(970, 56);
             this.panel3.TabIndex = 1;
             // 
             // FrmFase3
@@ -160,7 +162,7 @@ namespace Rixpert
             this.PictureCerrar.Image = ((System.Drawing.Image)(resources.GetObject("PictureCerrar.Image")));
             this.PictureCerrar.Location = new System.Drawing.Point(923, 10);
             this.PictureCerrar.Name = "PictureCerrar";
-            this.PictureCerrar.Size = new System.Drawing.Size(37, 37);
+            this.PictureCerrar.Size = new System.Drawing.Size(37, 13);
             this.PictureCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureCerrar.TabIndex = 4;
             this.PictureCerrar.TabStop = false;
@@ -203,7 +205,7 @@ namespace Rixpert
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Monoton", 90F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.MenuBar;
-            this.label2.Location = new System.Drawing.Point(29, 39);
+            this.label2.Location = new System.Drawing.Point(26, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(180, 187);
             this.label2.TabIndex = 9;
@@ -304,17 +306,19 @@ namespace Rixpert
             this.ControlFases.SelectedIndex = 0;
             this.ControlFases.Size = new System.Drawing.Size(979, 545);
             this.ControlFases.TabIndex = 3;
+            this.ControlFases.Click += new System.EventHandler(this.BtnContinuar3_Click);
             // 
             // FrmFase01
             // 
             this.FrmFase01.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(76)))));
             this.FrmFase01.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.FrmFase01.Controls.Add(this.BtnCargar1);
             this.FrmFase01.Controls.Add(this.dateTimePicker1);
             this.FrmFase01.Controls.Add(this.TxtAnalista1);
             this.FrmFase01.Controls.Add(this.LbFase1);
             this.FrmFase01.Controls.Add(this.BtnAgregar1);
             this.FrmFase01.Controls.Add(this.BtnEliminar1);
-            this.FrmFase01.Controls.Add(this.BtnGuardar1);
+            this.FrmFase01.Controls.Add(this.BtnContinuar1);
             this.FrmFase01.Controls.Add(this.DataGridFase1);
             this.FrmFase01.Location = new System.Drawing.Point(4, 22);
             this.FrmFase01.Name = "FrmFase01";
@@ -322,6 +326,20 @@ namespace Rixpert
             this.FrmFase01.Size = new System.Drawing.Size(971, 519);
             this.FrmFase01.TabIndex = 0;
             this.FrmFase01.Text = "FrmFase01";
+            // 
+            // BtnCargar1
+            // 
+            this.BtnCargar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(150)))), ((int)(((byte)(0)))));
+            this.BtnCargar1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.BtnCargar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCargar1.ForeColor = System.Drawing.Color.White;
+            this.BtnCargar1.Location = new System.Drawing.Point(735, 318);
+            this.BtnCargar1.Name = "BtnCargar1";
+            this.BtnCargar1.Size = new System.Drawing.Size(203, 47);
+            this.BtnCargar1.TabIndex = 19;
+            this.BtnCargar1.Text = "Cargar";
+            this.BtnCargar1.UseVisualStyleBackColor = false;
+            this.BtnCargar1.Click += new System.EventHandler(this.BtnCargar1_Click);
             // 
             // dateTimePicker1
             // 
@@ -361,7 +379,7 @@ namespace Rixpert
             this.BtnEliminar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(49)))), ((int)(((byte)(79)))));
             this.BtnEliminar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnEliminar1.ForeColor = System.Drawing.Color.White;
-            this.BtnEliminar1.Location = new System.Drawing.Point(735, 241);
+            this.BtnEliminar1.Location = new System.Drawing.Point(735, 244);
             this.BtnEliminar1.Name = "BtnEliminar1";
             this.BtnEliminar1.Size = new System.Drawing.Size(203, 47);
             this.BtnEliminar1.TabIndex = 15;
@@ -369,18 +387,19 @@ namespace Rixpert
             this.BtnEliminar1.UseVisualStyleBackColor = false;
             this.BtnEliminar1.Click += new System.EventHandler(this.BtnEliminar1_Click);
             // 
-            // BtnGuardar1
+            // BtnContinuar1
             // 
-            this.BtnGuardar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(189)))), ((int)(((byte)(79)))));
-            this.BtnGuardar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGuardar1.ForeColor = System.Drawing.Color.White;
-            this.BtnGuardar1.Location = new System.Drawing.Point(735, 313);
-            this.BtnGuardar1.Name = "BtnGuardar1";
-            this.BtnGuardar1.Size = new System.Drawing.Size(203, 47);
-            this.BtnGuardar1.TabIndex = 14;
-            this.BtnGuardar1.Text = "Guardar";
-            this.BtnGuardar1.UseVisualStyleBackColor = false;
-            this.BtnGuardar1.Click += new System.EventHandler(this.BtnGuardar1_Click);
+            this.BtnContinuar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(120)))), ((int)(((byte)(85)))));
+            this.BtnContinuar1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.BtnContinuar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnContinuar1.ForeColor = System.Drawing.Color.White;
+            this.BtnContinuar1.Location = new System.Drawing.Point(735, 393);
+            this.BtnContinuar1.Name = "BtnContinuar1";
+            this.BtnContinuar1.Size = new System.Drawing.Size(203, 47);
+            this.BtnContinuar1.TabIndex = 14;
+            this.BtnContinuar1.Text = "Continuar";
+            this.BtnContinuar1.UseVisualStyleBackColor = false;
+            this.BtnContinuar1.Click += new System.EventHandler(this.BtnContinuar1_Click);
             // 
             // DataGridFase1
             // 
@@ -434,7 +453,7 @@ namespace Rixpert
             this.FrmFase02.Controls.Add(this.dateTimePicker2);
             this.FrmFase02.Controls.Add(this.TxtAnalista2);
             this.FrmFase02.Controls.Add(this.LbFase2);
-            this.FrmFase02.Controls.Add(this.BtnGuardar2);
+            this.FrmFase02.Controls.Add(this.BtnContinuar2);
             this.FrmFase02.Location = new System.Drawing.Point(4, 22);
             this.FrmFase02.Name = "FrmFase02";
             this.FrmFase02.Padding = new System.Windows.Forms.Padding(3);
@@ -521,25 +540,25 @@ namespace Rixpert
             this.LbFase2.TabIndex = 18;
             this.LbFase2.Text = "FASE 2";
             // 
-            // BtnGuardar2
+            // BtnContinuar2
             // 
-            this.BtnGuardar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(189)))), ((int)(((byte)(79)))));
-            this.BtnGuardar2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGuardar2.ForeColor = System.Drawing.Color.White;
-            this.BtnGuardar2.Location = new System.Drawing.Point(26, 102);
-            this.BtnGuardar2.Name = "BtnGuardar2";
-            this.BtnGuardar2.Size = new System.Drawing.Size(203, 47);
-            this.BtnGuardar2.TabIndex = 15;
-            this.BtnGuardar2.Text = "Guardar";
-            this.BtnGuardar2.UseVisualStyleBackColor = false;
-            this.BtnGuardar2.Click += new System.EventHandler(this.BtnGuardar2_Click);
+            this.BtnContinuar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(120)))), ((int)(((byte)(85)))));
+            this.BtnContinuar2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnContinuar2.ForeColor = System.Drawing.Color.White;
+            this.BtnContinuar2.Location = new System.Drawing.Point(26, 102);
+            this.BtnContinuar2.Name = "BtnContinuar2";
+            this.BtnContinuar2.Size = new System.Drawing.Size(203, 47);
+            this.BtnContinuar2.TabIndex = 15;
+            this.BtnContinuar2.Text = "Continuar";
+            this.BtnContinuar2.UseVisualStyleBackColor = false;
+            this.BtnContinuar2.Click += new System.EventHandler(this.BtnContinuar2_Click);
             // 
             // FrmFase03
             // 
             this.FrmFase03.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(76)))));
             this.FrmFase03.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.FrmFase03.Controls.Add(this.DataGridFase3);
-            this.FrmFase03.Controls.Add(this.BtnGuardar3);
+            this.FrmFase03.Controls.Add(this.BtnContinuar3);
             this.FrmFase03.Controls.Add(this.dateTimePicker3);
             this.FrmFase03.Controls.Add(this.TxtAnalista3);
             this.FrmFase03.Controls.Add(this.LbFase3);
@@ -595,18 +614,17 @@ namespace Rixpert
             this.DataGridFase3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DataGridFase3_CellFormatting);
             this.DataGridFase3.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridFase3_CellValueChanged);
             // 
-            // BtnGuardar3
+            // BtnContinuar3
             // 
-            this.BtnGuardar3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(189)))), ((int)(((byte)(79)))));
-            this.BtnGuardar3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGuardar3.ForeColor = System.Drawing.Color.White;
-            this.BtnGuardar3.Location = new System.Drawing.Point(25, 101);
-            this.BtnGuardar3.Name = "BtnGuardar3";
-            this.BtnGuardar3.Size = new System.Drawing.Size(203, 47);
-            this.BtnGuardar3.TabIndex = 22;
-            this.BtnGuardar3.Text = "Guardar";
-            this.BtnGuardar3.UseVisualStyleBackColor = false;
-            this.BtnGuardar3.Click += new System.EventHandler(this.BtnGuardar3_Click);
+            this.BtnContinuar3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(120)))), ((int)(((byte)(85)))));
+            this.BtnContinuar3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnContinuar3.ForeColor = System.Drawing.Color.White;
+            this.BtnContinuar3.Location = new System.Drawing.Point(25, 101);
+            this.BtnContinuar3.Name = "BtnContinuar3";
+            this.BtnContinuar3.Size = new System.Drawing.Size(203, 47);
+            this.BtnContinuar3.TabIndex = 22;
+            this.BtnContinuar3.Text = "Continuar";
+            this.BtnContinuar3.UseVisualStyleBackColor = false;
             // 
             // dateTimePicker3
             // 
@@ -646,8 +664,9 @@ namespace Rixpert
             // 
             this.FrmFase04.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(76)))));
             this.FrmFase04.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.FrmFase04.Controls.Add(this.BtnGuardar1);
             this.FrmFase04.Controls.Add(this.DataGridFase4);
-            this.FrmFase04.Controls.Add(this.BtnGuardar4);
+            this.FrmFase04.Controls.Add(this.BtnContinuar4);
             this.FrmFase04.Controls.Add(this.dateTimePicker4);
             this.FrmFase04.Controls.Add(this.TxtAnalista4);
             this.FrmFase04.Controls.Add(this.LbFase4);
@@ -657,6 +676,19 @@ namespace Rixpert
             this.FrmFase04.Size = new System.Drawing.Size(971, 519);
             this.FrmFase04.TabIndex = 3;
             this.FrmFase04.Text = "FrmFase04";
+            // 
+            // BtnGuardar1
+            // 
+            this.BtnGuardar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(189)))), ((int)(((byte)(79)))));
+            this.BtnGuardar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnGuardar1.ForeColor = System.Drawing.Color.White;
+            this.BtnGuardar1.Location = new System.Drawing.Point(25, 101);
+            this.BtnGuardar1.Name = "BtnGuardar1";
+            this.BtnGuardar1.Size = new System.Drawing.Size(203, 47);
+            this.BtnGuardar1.TabIndex = 26;
+            this.BtnGuardar1.Text = "Guardar";
+            this.BtnGuardar1.UseVisualStyleBackColor = false;
+            this.BtnGuardar1.Click += new System.EventHandler(this.BtnGuardar1_Click);
             // 
             // DataGridFase4
             // 
@@ -702,18 +734,18 @@ namespace Rixpert
             this.DataGridFase4.VirtualMode = true;
             this.DataGridFase4.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DataGridFase4_CellFormatting);
             // 
-            // BtnGuardar4
+            // BtnContinuar4
             // 
-            this.BtnGuardar4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(189)))), ((int)(((byte)(79)))));
-            this.BtnGuardar4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGuardar4.ForeColor = System.Drawing.Color.White;
-            this.BtnGuardar4.Location = new System.Drawing.Point(25, 101);
-            this.BtnGuardar4.Name = "BtnGuardar4";
-            this.BtnGuardar4.Size = new System.Drawing.Size(203, 47);
-            this.BtnGuardar4.TabIndex = 24;
-            this.BtnGuardar4.Text = "Guardar";
-            this.BtnGuardar4.UseVisualStyleBackColor = false;
-            this.BtnGuardar4.Click += new System.EventHandler(this.BtnGuardar4_Click);
+            this.BtnContinuar4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(120)))), ((int)(((byte)(85)))));
+            this.BtnContinuar4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnContinuar4.ForeColor = System.Drawing.Color.White;
+            this.BtnContinuar4.Location = new System.Drawing.Point(249, 101);
+            this.BtnContinuar4.Name = "BtnContinuar4";
+            this.BtnContinuar4.Size = new System.Drawing.Size(203, 47);
+            this.BtnContinuar4.TabIndex = 24;
+            this.BtnContinuar4.Text = "Continuar";
+            this.BtnContinuar4.UseVisualStyleBackColor = false;
+            this.BtnContinuar4.Click += new System.EventHandler(this.BtnContinuar4_Click);
             // 
             // dateTimePicker4
             // 
@@ -824,12 +856,12 @@ namespace Rixpert
         private System.Windows.Forms.Button BtnFase02;
         private System.Windows.Forms.Button BtnFase01;
         private System.Windows.Forms.Panel FrmFase3;
-        private System.Windows.Forms.Button BtnGuardar1;
+        private System.Windows.Forms.Button BtnContinuar1;
         private System.Windows.Forms.Button BtnEliminar1;
         private System.Windows.Forms.Button BtnAgregar1;
         private System.Windows.Forms.Label LbFase1;
         private System.Windows.Forms.Label LbFase2;
-        private System.Windows.Forms.Button BtnGuardar2;
+        private System.Windows.Forms.Button BtnContinuar2;
         private System.Windows.Forms.Label LbFase3;
         private System.Windows.Forms.Label LbFase4;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
@@ -840,10 +872,12 @@ namespace Rixpert
         private System.Windows.Forms.DateTimePicker dateTimePicker4;
         private System.Windows.Forms.TextBox TxtAnalista4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button BtnGuardar3;
-        private System.Windows.Forms.Button BtnGuardar4;
+        private System.Windows.Forms.Button BtnContinuar3;
+        private System.Windows.Forms.Button BtnContinuar4;
         private DataGridView DataGridFase2;
         private DataGridView DataGridFase3;
         private DataGridView DataGridFase4;
+        private Button BtnGuardar1;
+        private Button BtnCargar1;
     }
 }
