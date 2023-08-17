@@ -132,7 +132,7 @@ namespace Rixpert
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Location = new System.Drawing.Point(230, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(970, 56);
+            this.panel3.Size = new System.Drawing.Size(970, 80);
             this.panel3.TabIndex = 1;
             // 
             // FrmFase3
@@ -162,7 +162,7 @@ namespace Rixpert
             this.PictureCerrar.Image = ((System.Drawing.Image)(resources.GetObject("PictureCerrar.Image")));
             this.PictureCerrar.Location = new System.Drawing.Point(923, 10);
             this.PictureCerrar.Name = "PictureCerrar";
-            this.PictureCerrar.Size = new System.Drawing.Size(37, 13);
+            this.PictureCerrar.Size = new System.Drawing.Size(37, 37);
             this.PictureCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureCerrar.TabIndex = 4;
             this.PictureCerrar.TabStop = false;
@@ -391,6 +391,7 @@ namespace Rixpert
             // 
             this.BtnContinuar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(120)))), ((int)(((byte)(85)))));
             this.BtnContinuar1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.BtnContinuar1.Enabled = false;
             this.BtnContinuar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnContinuar1.ForeColor = System.Drawing.Color.White;
             this.BtnContinuar1.Location = new System.Drawing.Point(735, 393);
@@ -445,6 +446,8 @@ namespace Rixpert
             this.DataGridFase1.VirtualMode = true;
             this.DataGridFase1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridFase1_CellEndEdit);
             this.DataGridFase1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridFase1_CellValueChanged);
+            this.DataGridFase1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DataGridFase1_RowsAdded);
+            this.DataGridFase1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DataGridFase1_RowsRemoved);
             // 
             // FrmFase02
             // 
